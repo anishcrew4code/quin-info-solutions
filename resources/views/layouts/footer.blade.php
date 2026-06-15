@@ -47,7 +47,7 @@
                 <h6>Contact Us</h6>
                 <div class="footer-contact-item">
                     <i class="fas fa-phone"></i>
-                    <span>+91 12245 67899</span>
+                    <span>+91 94953 70214</span>
                 </div>
                 <div class="footer-contact-item">
                     <i class="fas fa-envelope"></i>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="footer-contact-item">
                     <i class="fas fa-location-dot"></i>
-                    <span>123, Tech Park, Bangalore,<br>Karnataka, India – 560001</span>
+                    <span>104, Kaloor, Kochi,<br>Kerala, India - 682017</span>
                 </div>
             </div>
 

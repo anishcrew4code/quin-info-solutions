@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\PageController;
+use App\Http\Controllers\Frontend\CaptchaController;
 
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -17,3 +18,8 @@ Route::get('/portfolio',    [PageController::class, 'portfolio'])->name('portfol
 // Contact
 Route::get('/contact',  [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.submit');
+
+// Captcha
+Route::get('/captcha',         [CaptchaController::class, 'generate'])->name('captcha.image');
+Route::get('/captcha-refresh', [CaptchaController::class, 'refresh'])->name('captcha.refresh');
+

@@ -26,7 +26,7 @@
                         <div class="contact-info-icon"><i class="fas fa-phone"></i></div>
                         <div class="contact-info-text">
                             <h6>Phone</h6>
-                            <p>+91 12245 67899</p>
+                            <p>+91 94953 70214</p>
                         </div>
                     </div>
 
@@ -42,7 +42,7 @@
                         <div class="contact-info-icon"><i class="fas fa-location-dot"></i></div>
                         <div class="contact-info-text">
                             <h6>Address</h6>
-                            <p>123, Tech Park, Bangalore,<br>Karnataka, India – 560001</p>
+                            <p>104, Kaloor, Kochi,<br>Kerala, India - 682017</p>
                         </div>
                     </div>
 
@@ -85,24 +85,26 @@
                         Fill out the form below and we'll respond within 24 hours.
                     </p>
 
-                    {{-- Success Alert --}}
-                    @if(session('success'))
-                        <div class="alert-success-custom d-flex align-items-center gap-2">
-                            <i class="fas fa-circle-check" style="font-size:18px;"></i>
-                            {{ session('success') }}
-                        </div>
-                    @endif
+                    {{-- Success Alert (Supports both SSR and AJAX) --}}
+                    <div id="ajax-success-alert" class="alert-success-custom align-items-center gap-2 mb-4" style="display: {{ session('success') ? 'flex' : 'none' }};">
+                        <i class="fas fa-circle-check" style="font-size:18px;"></i>
+                        <span id="ajax-success-msg">{{ session('success') }}</span>
+                    </div>
 
-                    {{-- Validation Errors --}}
-                    @if($errors->any())
-                        <div class="alert alert-danger rounded-3 mb-4">
-                            <ul class="mb-0 ps-3">
-                                @foreach($errors->all() as $error)
-                                    <li style="font-size:14px;">{{ $error }}</li>
-                                @endforeach
-                            </ul>
+                    {{-- Validation Errors (Supports both SSR and AJAX) --}}
+                    <div id="ajax-error-alert" class="alert alert-danger rounded-3 mb-4" style="display: {{ $errors->any() ? 'block' : 'none' }};">
+                        <div class="d-flex align-items-center gap-2 mb-2">
+                            <i class="fas fa-triangle-exclamation" style="font-size:16px;"></i>
+                            <strong style="font-size:14.5px;">Please correct the errors below:</strong>
                         </div>
-                    @endif
+                        <ul id="ajax-error-list" class="mb-0 ps-3" style="font-size:14px;">
+                            @if($errors->any())
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            @endif
+                        </ul>
+                    </div>
 
                     <form action="{{ route('contact.submit') }}" method="POST" id="contactForm" novalidate>
                         @csrf
@@ -187,7 +189,35 @@
                                 @enderror
                             </div>
 
-                            <div class="col-12 mt-2">
+                            <!-- CAPTCHA Field -->
+                            <div class="col-12 mt-3">
+                                <label for="captcha" class="form-label">
+                                    Verification Code <span class="text-danger">*</span>
+                                </label>
+                                <div class="d-flex align-items-center gap-2 flex-wrap">
+                                    <div class="captcha-img-container" style="border: 1px solid var(--border-light); border-radius: var(--radius-sm); overflow: hidden; background: #f8f9fa; height: 42px; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);">
+                                        <img src="{{ route('captcha.image') }}" alt="CAPTCHA" id="captcha-img" width="140" height="42" style="display: block; object-fit: cover;">
+                                    </div>
+                                    <button type="button" class="btn btn-outline-secondary" id="refresh-captcha" style="height: 42px; display: flex; align-items: center; justify-content: center; width: 42px; border-color: var(--border-light); color: var(--primary); transition: all 0.2s;" title="Refresh CAPTCHA">
+                                        <i class="fas fa-arrows-rotate" id="refresh-icon"></i>
+                                    </button>
+                                    <div class="flex-grow-1" style="min-width: 160px;">
+                                        <input type="text"
+                                               id="captcha"
+                                               name="captcha"
+                                               class="form-control @error('captcha') is-invalid @enderror"
+                                               placeholder="Enter 5-character code"
+                                               required
+                                               autocomplete="off"
+                                               style="height: 42px; text-transform: uppercase;">
+                                        @error('captcha')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12 mt-3">
                                 <button type="submit" class="btn-submit" id="submitBtn">
                                     <i class="fas fa-paper-plane me-2"></i>
                                     Send Message
@@ -221,11 +251,161 @@
 
 @push('scripts')
 <script>
-    // Submit button loading state
-    document.getElementById('contactForm')?.addEventListener('submit', function() {
+    // Helper to refresh CAPTCHA dynamically
+    function triggerCaptchaRefresh() {
+        const img = document.getElementById('captcha-img');
+        const icon = document.getElementById('refresh-icon');
+        if (!img) return;
+        
+        icon?.classList.add('fa-spin');
+        
+        fetch("{{ route('captcha.refresh') }}")
+            .then(response => response.json())
+            .then(data => {
+                img.src = data.url;
+                setTimeout(() => {
+                    icon?.classList.remove('fa-spin');
+                }, 400);
+            })
+            .catch(err => {
+                console.error('Failed to refresh captcha:', err);
+                icon?.classList.remove('fa-spin');
+            });
+    }
+
+    // Refresh CAPTCHA click event listener
+    document.getElementById('refresh-captcha')?.addEventListener('click', triggerCaptchaRefresh);
+
+    // Dynamic AJAX form submit handler
+    document.getElementById('contactForm')?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const form = this;
+        
+        // Use browser HTML5 validation checks first
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
         const btn = document.getElementById('submitBtn');
+        const originalBtnHtml = btn.innerHTML;
+        
+        // Set loading state
         btn.disabled = true;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+
+        // Clear existing validation styles
+        form.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+        form.querySelectorAll('.invalid-feedback').forEach(el => el.textContent = '');
+        
+        // Hide top alert components
+        document.getElementById('ajax-success-alert').style.display = 'none';
+        document.getElementById('ajax-error-alert').style.display = 'none';
+
+        // Pack form data
+        const formData = new FormData(form);
+
+        // Submit via AJAX Fetch
+        fetch(form.action, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+        .then(response => {
+            return response.json().then(data => {
+                if (!response.ok) {
+                    if (response.status === 422) {
+                        throw { type: 'validation', errors: data.errors };
+                    } else {
+                        throw { type: 'general', message: data.message || 'An error occurred. Please try again.' };
+                    }
+                }
+                return data;
+            });
+        })
+        .then(data => {
+            // Display success alert
+            const successAlert = document.getElementById('ajax-success-alert');
+            const successMsg = document.getElementById('ajax-success-msg');
+            successMsg.textContent = data.message || 'Your message has been sent successfully!';
+            successAlert.style.display = 'flex';
+            
+            // Clear input inputs
+            form.reset();
+            
+            // Re-enable and reset button
+            btn.disabled = false;
+            btn.innerHTML = originalBtnHtml;
+
+            // Load a fresh CAPTCHA code
+            triggerCaptchaRefresh();
+            
+            // Scroll smoothly to alerts container
+            document.querySelector('.contact-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        })
+        .catch(err => {
+            // Re-enable submit button
+            btn.disabled = false;
+            btn.innerHTML = originalBtnHtml;
+
+            // Generate fresh CAPTCHA on failure so previous input cannot be brute forced
+            triggerCaptchaRefresh();
+
+            if (err.type === 'validation') {
+                const errorAlert = document.getElementById('ajax-error-alert');
+                const errorList = document.getElementById('ajax-error-list');
+                
+                // Reset errors bullet list
+                errorList.innerHTML = '';
+                
+                // Show errors dynamically under each field
+                for (const field in err.errors) {
+                    const messages = err.errors[field];
+                    const input = document.getElementById(field);
+                    
+                    if (input) {
+                        input.classList.add('is-invalid');
+                        
+                        // Locate error description element (usually sibling, or inside flex-container parent)
+                        let feedback = input.nextElementSibling;
+                        if (!feedback || !feedback.classList.contains('invalid-feedback')) {
+                            feedback = input.parentElement.querySelector('.invalid-feedback');
+                        }
+                        
+                        if (feedback) {
+                            feedback.textContent = messages[0];
+                        }
+                    }
+
+                    // Populate top list
+                    messages.forEach(msg => {
+                        const li = document.createElement('li');
+                        li.textContent = msg;
+                        errorList.appendChild(li);
+                    });
+                }
+                
+                errorAlert.style.display = 'block';
+            } else {
+                // Display general system/server error
+                const errorAlert = document.getElementById('ajax-error-alert');
+                const errorList = document.getElementById('ajax-error-list');
+                
+                errorList.innerHTML = '';
+                const li = document.createElement('li');
+                li.textContent = err.message || 'An internal error occurred. Please try again later.';
+                errorList.appendChild(li);
+                
+                errorAlert.style.display = 'block';
+            }
+            
+            // Scroll smoothly to alert container
+            document.querySelector('.contact-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
     });
 
     // Social hover colour
