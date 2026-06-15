@@ -8,6 +8,14 @@
     <meta name="keywords"    content="IT solutions, web development, mobile app development, cloud solutions, software solutions, Bangalore">
     <meta name="author"      content="Quin Info Solutions">
 
+    {{-- Favicon --}}
+    <link rel="icon"             type="image/png" sizes="512x512" href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="icon"             type="image/png" sizes="192x192" href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="shortcut icon"    type="image/x-icon"              href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180"                  href="{{ asset('assets/images/favicon.png') }}">
+    <meta name="theme-color" content="#032f67">
+    <meta name="msapplication-TileColor" content="#032f67">
+
     {{-- Preconnect for speed --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

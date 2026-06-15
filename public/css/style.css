@@ -370,8 +370,110 @@ img { max-width: 100%; }
 }
 
 /* ─── TECHNOLOGIES SECTION ─── */
-.tech-section { padding: 90px 0; background: var(--white); }
+.tech-section { padding: 90px 0; background: var(--white); overflow: hidden; }
 
+/* ── Marquee wrapper ── */
+.tech-marquee-wrap {
+    width: 100%;
+    overflow: hidden;
+    padding: 10px 0 4px;
+    /* fade edges with mask */
+    -webkit-mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        #000 8%,
+        #000 92%,
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to right,
+        transparent 0%,
+        #000 8%,
+        #000 92%,
+        transparent 100%
+    );
+}
+
+/* ── One marquee row ── */
+.tech-marquee {
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+.tech-marquee:last-child { margin-bottom: 0; }
+
+/* ── The scrolling track (holds 2× the items) ── */
+.tech-marquee__track {
+    display: flex;
+    gap: 16px;
+    flex-shrink: 0;
+    will-change: transform;
+}
+
+/* Left-scrolling row */
+.tech-marquee--left .tech-marquee__track {
+    animation: marqueeLeft 32s linear infinite;
+}
+/* Right-scrolling row */
+.tech-marquee--right .tech-marquee__track {
+    animation: marqueeRight 36s linear infinite;
+}
+
+/* Pause on hover anywhere on the track */
+.tech-marquee:hover .tech-marquee__track { animation-play-state: paused; }
+
+/* ── Keyframes ── */
+@keyframes marqueeLeft {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+@keyframes marqueeRight {
+    0%   { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+}
+
+/* ── Individual tech card ── */
+.tech-marquee__item {
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 120px;
+    height: 110px;
+    background: var(--white);
+    border: 1.5px solid var(--border-light);
+    border-radius: var(--radius-md);
+    padding: 18px 12px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    cursor: default;
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+.tech-marquee__item:hover {
+    transform: translateY(-6px) scale(1.05);
+    box-shadow: 0 14px 36px rgba(3,47,103,.14);
+    border-color: var(--secondary);
+}
+.tech-marquee__item img {
+    height: 44px;
+    width: 44px;
+    object-fit: contain;
+    display: block;
+    transition: transform .3s ease;
+}
+.tech-marquee__item:hover img { transform: scale(1.12); }
+.tech-marquee__item span {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #444;
+    white-space: nowrap;
+}
+
+/* Keep old .tech-card for Technologies inner page */
 .tech-card {
     background: var(--white);
     border: 1.5px solid var(--border-light);
@@ -735,3 +837,74 @@ img { max-width: 100%; }
     display: inline-block;
     margin-bottom: 24px;
 }
+
+/* ═══════════════════════════════════════════════
+   PARTICLE CANVAS
+   ═══════════════════════════════════════════════ */
+#hero-particles {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;          /* sits below content (z-index:1) */
+    pointer-events: none;
+    display: block;
+}
+
+/* Remove old CSS dot-grid pseudo layer — canvas replaces it */
+.hero-section::before { display: none; }
+
+/* ═══════════════════════════════════════════════
+   HERO ENTRANCE ANIMATIONS
+   ═══════════════════════════════════════════════ */
+
+/* Left text block slides in from the left */
+@keyframes heroSlideLeft {
+    from { opacity: 0; transform: translateX(-50px); }
+    to   { opacity: 1; transform: translateX(0);      }
+}
+
+/* Right logo slides in from the right */
+@keyframes heroSlideRight {
+    from { opacity: 0; transform: translateX(50px); }
+    to   { opacity: 1; transform: translateX(0);    }
+}
+
+/* Logo gentle floating loop */
+@keyframes heroFloat {
+    0%,100% { transform: translateY(0px)    drop-shadow(0 20px 60px rgba(0,0,0,.4)); }
+    50%      { transform: translateY(-18px) drop-shadow(0 30px 70px rgba(0,0,0,.5)); }
+}
+
+/* Pulsing gold glow ring behind logo */
+@keyframes goldenPulse {
+    0%,100% { box-shadow: 0 0 0   0px rgba(244,185,66,.0); }
+    50%      { box-shadow: 0 0 60px 20px rgba(244,185,66,.18); }
+}
+
+.hero-content-left {
+    animation: heroSlideLeft .9s cubic-bezier(.22,1,.36,1) both;
+}
+
+.hero-content-right {
+    animation: heroSlideRight .9s .2s cubic-bezier(.22,1,.36,1) both;
+}
+
+.hero-logo-img {
+    animation: heroFloat 5s ease-in-out infinite;
+    filter: drop-shadow(0 20px 60px rgba(0,0,0,.4));
+}
+
+/* Stagger hero text children */
+.hero-content-left .hero-title {
+    animation: heroSlideLeft .8s .1s cubic-bezier(.22,1,.36,1) both;
+}
+.hero-content-left .hero-desc {
+    animation: heroSlideLeft .8s .25s cubic-bezier(.22,1,.36,1) both;
+}
+.hero-content-left .d-flex {
+    animation: heroSlideLeft .8s .4s cubic-bezier(.22,1,.36,1) both;
+}
+
+/* Badge / pill floating behind logo */
+.hero-section .z-1 { position: relative; z-index: 1; }

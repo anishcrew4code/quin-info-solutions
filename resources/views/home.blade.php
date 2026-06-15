@@ -3,11 +3,14 @@
 <section class="hero-section" id="home"
          style="background-image: linear-gradient(135deg,rgba(3,20,65,.92) 0%,rgba(3,47,103,.85) 60%,rgba(5,60,120,.80) 100%), url('{{ asset('assets/images/banner-bg1.jpg') }}');">
 
+    {{-- Particle canvas (rendered by main.js initParticles) --}}
+    <canvas id="hero-particles" aria-hidden="true"></canvas>
+
     <div class="container position-relative z-1">
         <div class="row align-items-center">
 
             <!-- Left Text -->
-            <div class="col-lg-6 py-5">
+            <div class="col-lg-6 py-5 hero-content-left">
 
                 <h1 class="hero-title">
                     Delivering Innovative
@@ -29,9 +32,9 @@
             </div>
 
             <!-- Right Logo / Illustration -->
-            <div class="col-lg-6 text-center py-4">
+            <div class="col-lg-6 text-center py-4 hero-content-right">
                 <img src="{{ asset('assets/images/logo-big.png') }}"
-                     class="img-fluid"
+                     class="img-fluid hero-logo-img"
                      style="max-height:480px; filter:drop-shadow(0 20px 60px rgba(0,0,0,.4));"
                      alt="Quin Info Solutions">
             </div>
@@ -49,6 +52,7 @@
     </div>
 
 </section>
+
 
 <!-- ─── SERVICES SECTION ─── -->
 <section class="services-section" id="services">
@@ -218,6 +222,7 @@
     <div class="container">
 
         <div class="text-center mb-5">
+            <span class="section-label">Our Stack</span>
             <h2 class="section-title">Technologies We Work With</h2>
             <p class="section-sub mt-2">
                 We use the latest technologies and tools to build
@@ -225,67 +230,75 @@
             </p>
         </div>
 
-        <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-7 g-4 justify-content-center">
+    </div>
 
-            <div class="col">
-                <div class="tech-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5">
-                    <span>HTML5</span>
-                </div>
+    {{-- Full-width marquee (outside container so it bleeds edge-to-edge) --}}
+    <div class="tech-marquee-wrap">
+
+        {{-- Row 1 — scrolls LEFT --}}
+        <div class="tech-marquee tech-marquee--left">
+            <div class="tech-marquee__track">
+                @php
+                    $techsRow1 = [
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg','name'=>'HTML5'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg','name'=>'CSS3'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg','name'=>'JavaScript'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg','name'=>'React'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg','name'=>'Vue.js'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg','name'=>'Laravel'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg','name'=>'PHP'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg','name'=>'Python'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg','name'=>'MySQL'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg','name'=>'Node.js'],
+                    ];
+                @endphp
+                {{-- Duplicate for seamless loop --}}
+                @foreach(array_merge($techsRow1, $techsRow1) as $t)
+                    <div class="tech-marquee__item">
+                        <img src="{{ $t['src'] }}" alt="{{ $t['name'] }}" loading="lazy">
+                        <span>{{ $t['name'] }}</span>
+                    </div>
+                @endforeach
             </div>
-
-            <div class="col">
-                <div class="tech-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3">
-                    <span>CSS3</span>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="tech-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript">
-                    <span>JavaScript</span>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="tech-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React">
-                    <span>React</span>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="tech-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg" alt="Laravel">
-                    <span>Laravel</span>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="tech-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/php/php-original.svg" alt="PHP">
-                    <span>PHP</span>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="tech-card">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL">
-                    <span>MySQL</span>
-                </div>
-            </div>
-
         </div>
 
+        {{-- Row 2 — scrolls RIGHT --}}
+        <div class="tech-marquee tech-marquee--right">
+            <div class="tech-marquee__track">
+                @php
+                    $techsRow2 = [
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg','name'=>'MongoDB'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg','name'=>'PostgreSQL'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg','name'=>'Docker'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg','name'=>'AWS'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg','name'=>'Git'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg','name'=>'Bootstrap'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg','name'=>'Linux'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg','name'=>'Redis'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg','name'=>'TypeScript'],
+                        ['src'=>'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg','name'=>'Firebase'],
+                    ];
+                @endphp
+                @foreach(array_merge($techsRow2, $techsRow2) as $t)
+                    <div class="tech-marquee__item">
+                        <img src="{{ $t['src'] }}" alt="{{ $t['name'] }}" loading="lazy">
+                        <span>{{ $t['name'] }}</span>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+    </div>{{-- /tech-marquee-wrap --}}
+
+    <div class="container">
         <div class="text-center mt-5">
             <a href="{{ route('technologies') }}" class="btn-view-all">
                 View All Technologies
                 <i class="fas fa-arrow-right"></i>
             </a>
         </div>
-
     </div>
+
 </section>
 
 @include('layouts.footer')
