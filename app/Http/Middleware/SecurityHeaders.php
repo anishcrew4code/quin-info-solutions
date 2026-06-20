@@ -19,11 +19,12 @@ class SecurityHeaders
 
         // Content Security Policy (CSP)
         $csp = "default-src 'self'; " .
-               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net; " .
+               "script-src 'self' https://cdn.jsdelivr.net; " .
                "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.bunny.net; " .
                "img-src 'self' data: https://cdn.jsdelivr.net; " .
                "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com https://fonts.bunny.net; " .
                "frame-src 'self' https://www.google.com; " .
+               "object-src 'none'; " .
                "connect-src 'self';";
 
         $response->headers->set('Content-Security-Policy', $csp);
