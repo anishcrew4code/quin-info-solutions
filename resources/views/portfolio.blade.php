@@ -21,8 +21,8 @@
                             @if($portfolio->image)
                                 <img src="{{ asset('storage/' . $portfolio->image) }}" alt="{{ $portfolio->title }}">
                             @else
-                                <div style="height:220px; background:linear-gradient(135deg,#032f67,#0a4a9e); display:flex; align-items:center; justify-content:center;">
-                                    <i class="fas fa-laptop-code" style="font-size:48px; color:rgba(255,255,255,.3);"></i>
+                                <div class="portfolio-placeholder-img">
+                                    <i class="fas fa-laptop-code portfolio-placeholder-icon"></i>
                                 </div>
                             @endif
                             <div class="portfolio-card-body">
@@ -53,9 +53,9 @@
                 ] as $p)
                     <div class="col-lg-4 col-md-6">
                         <div class="portfolio-card">
-                            <div style="height:220px; background:linear-gradient(135deg,{{ $p['color'] }},{{ $p['color'] }}aa); display:flex; flex-direction:column; align-items:center; justify-content:center;">
-                                <i class="fas fa-laptop-code" style="font-size:48px; color:rgba(255,255,255,.35); margin-bottom:10px;"></i>
-                                <span style="color:rgba(255,255,255,.6); font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:1px;">{{ $p['cat'] }}</span>
+                            <div class="portfolio-fallback-img" style="--card-color: {{ $p['color'] }}; --card-color-alpha: {{ $p['color'] }}aa;">
+                                <i class="fas fa-laptop-code portfolio-fallback-icon"></i>
+                                <span class="portfolio-fallback-cat">{{ $p['cat'] }}</span>
                             </div>
                             <div class="portfolio-card-body">
                                 <h5>{{ $p['title'] }}</h5>
@@ -75,7 +75,7 @@
 <section class="stats-section py-5">
     <div class="container text-center">
         <h2 class="text-white fw-bold mb-3">Got a Project Idea?</h2>
-        <p class="mb-4" style="color:rgba(255,255,255,.75); font-size:16px;">
+        <p class="mb-4 cta-desc">
             Let's build something amazing together.
         </p>
         <a href="{{ route('contact') }}" class="btn-hero-primary">Let's Talk</a>

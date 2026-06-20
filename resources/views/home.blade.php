@@ -1,7 +1,6 @@
 @include('layouts.header')
 
-<section class="hero-section" id="home"
-         style="background-image: linear-gradient(135deg,rgba(3,20,65,.92) 0%,rgba(3,47,103,.85) 60%,rgba(5,60,120,.80) 100%), url('{{ asset('assets/images/banner-bg1.jpg') }}');">
+<section class="hero-section" id="home">
 
     {{-- Particle canvas (rendered by main.js initParticles) --}}
     <canvas id="hero-particles" aria-hidden="true"></canvas>
@@ -35,7 +34,6 @@
             <div class="col-lg-6 text-center py-4 hero-content-right">
                 <img src="{{ asset('assets/images/logo-big.png') }}"
                      class="img-fluid hero-logo-img"
-                     style="max-height:480px; filter:drop-shadow(0 20px 60px rgba(0,0,0,.4));"
                      alt="Quin Info Solutions">
             </div>
 
@@ -45,7 +43,7 @@
     <!-- Wave separator -->
     <div class="hero-wave">
         <svg viewBox="0 0 1440 80" preserveAspectRatio="none"
-             xmlns="http://www.w3.org/2000/svg" style="display:block;">
+             xmlns="http://www.w3.org/2000/svg">
             <path d="M0,40 C360,100 1080,0 1440,40 L1440,80 L0,80 Z"
                   fill="#ffffff"/>
         </svg>
@@ -137,7 +135,7 @@
                     We Are <span class="highlight">QUIN</span><br>
                     Info Solutions
                 </h2>
-                <p class="mt-3" style="color:#555; line-height:1.8; font-size:15px;">
+                <p class="mt-3 about-intro-text">
                     We are a team of passionate technologists, designers and
                     problem-solvers dedicated to delivering innovative IT solutions
                     that drive real business value.

@@ -153,6 +153,13 @@
     .section-title  { font-size: 24px; }
     .page-banner-title { font-size: 26px; }
     .page-banner    { padding: 100px 0 48px; }
+
+    /* Custom Responsive Classes */
+    .about-intro-text { font-size: 14.5px; }
+    .cta-desc { font-size: 14.5px; }
+    .portfolio-placeholder-img { height: 190px; }
+    .portfolio-fallback-img { height: 190px; }
+    .service-stat-num { font-size: 28px; }
 }
 
 /* ─────────────────────────────────────────────
@@ -204,6 +211,10 @@
     .services-section  { padding: 50px 0; }
     .about-section     { padding: 50px 0; }
     .tech-section      { padding: 50px 0; }
+
+    /* Custom Responsive Classes */
+    .portfolio-placeholder-img { height: 170px; }
+    .portfolio-fallback-img { height: 170px; }
 }
 
 /* ─────────────────────────────────────────────

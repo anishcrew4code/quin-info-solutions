@@ -9,31 +9,31 @@
             <div class="col-lg-6">
                 <p class="section-label">Who We Are</p>
                 <h2 class="section-title">We Are <span class="highlight">QUIN</span> Info Solutions</h2>
-                <p class="mt-3" style="color:#555; line-height:1.8; font-size:15.5px;">
+                <p class="mt-3 about-intro-text">
                     Founded with a passion for technology, Quin Info Solutions is a team of dedicated
                     professionals committed to delivering cutting-edge IT solutions. We combine creativity
                     with technical excellence to build digital products that create real impact.
                 </p>
-                <p class="mt-2" style="color:#555; line-height:1.8; font-size:15.5px;">
+                <p class="mt-2 about-intro-text">
                     From startups to enterprises, we tailor our approach to meet the unique needs of
                     each client, ensuring every solution is scalable, secure, and future-ready.
                 </p>
                 <div class="row g-3 mt-3">
-                    <div class="col-6 text-center p-3" style="background:#f8f9fc; border-radius:12px;">
-                        <h3 class="fw-800" style="color:var(--primary); font-weight:800;">50+</h3>
-                        <p class="mb-0" style="font-size:14px; color:#666;">Happy Clients</p>
+                    <div class="col-6 text-center p-3 about-stat-card">
+                        <h3 class="fw-800 about-stat-num">50+</h3>
+                        <p class="mb-0 about-stat-text">Happy Clients</p>
                     </div>
-                    <div class="col-6 text-center p-3" style="background:#f8f9fc; border-radius:12px;">
-                        <h3 class="fw-800" style="color:var(--primary); font-weight:800;">120+</h3>
-                        <p class="mb-0" style="font-size:14px; color:#666;">Projects Delivered</p>
+                    <div class="col-6 text-center p-3 about-stat-card">
+                        <h3 class="fw-800 about-stat-num">120+</h3>
+                        <p class="mb-0 about-stat-text">Projects Delivered</p>
                     </div>
-                    <div class="col-6 text-center p-3" style="background:#f8f9fc; border-radius:12px;">
-                        <h3 class="fw-800" style="color:var(--primary); font-weight:800;">15+</h3>
-                        <p class="mb-0" style="font-size:14px; color:#666;">Team Members</p>
+                    <div class="col-6 text-center p-3 about-stat-card">
+                        <h3 class="fw-800 about-stat-num">15+</h3>
+                        <p class="mb-0 about-stat-text">Team Members</p>
                     </div>
-                    <div class="col-6 text-center p-3" style="background:#f8f9fc; border-radius:12px;">
-                        <h3 class="fw-800" style="color:var(--primary); font-weight:800;">5+</h3>
-                        <p class="mb-0" style="font-size:14px; color:#666;">Years Experience</p>
+                    <div class="col-6 text-center p-3 about-stat-card">
+                        <h3 class="fw-800 about-stat-num">5+</h3>
+                        <p class="mb-0 about-stat-text">Years Experience</p>
                     </div>
                 </div>
             </div>
@@ -93,7 +93,7 @@
 <section class="stats-section py-5">
     <div class="container text-center">
         <h2 class="text-white fw-bold mb-3">Ready to Work Together?</h2>
-        <p class="mb-4" style="color:rgba(255,255,255,.75); font-size:16px;">
+        <p class="mb-4 cta-desc">
             Let's build something great. Reach out to our team today.
         </p>
         <a href="{{ route('contact') }}" class="btn-hero-primary">Contact Us Now</a>

@@ -116,7 +116,7 @@
             <div class="col-lg-5">
                 <p class="section-label">Why Choose Us</p>
                 <h2 class="section-title">We Deliver Results, <span class="highlight">Not Just Code</span></h2>
-                <p class="mt-3" style="color:#555; line-height:1.8;">
+                <p class="mt-3 about-intro-text">
                     With years of hands-on experience, our team ensures that every solution is built
                     to scale, performs flawlessly, and aligns with your business goals.
                 </p>
@@ -147,9 +147,9 @@
                         ['num'=>'24/7','label'=>'Support Available'],
                     ] as $stat)
                         <div class="col-6">
-                            <div class="text-center p-4" style="background:#fff; border-radius:14px; box-shadow:0 4px 14px rgba(0,0,0,.06);">
-                                <h2 style="color:var(--primary); font-weight:800; font-size:36px;">{{ $stat['num'] }}</h2>
-                                <p class="mb-0" style="color:#666; font-size:14px; font-weight:500;">{{ $stat['label'] }}</p>
+                            <div class="text-center p-4 service-stat-card">
+                                <h2 class="service-stat-num">{{ $stat['num'] }}</h2>
+                                <p class="mb-0 service-stat-label">{{ $stat['label'] }}</p>
                             </div>
                         </div>
                     @endforeach
@@ -163,7 +163,7 @@
 <section class="stats-section py-5">
     <div class="container text-center">
         <h2 class="text-white fw-bold mb-3">Have a Project in Mind?</h2>
-        <p class="mb-4" style="color:rgba(255,255,255,.75); font-size:16px;">
+        <p class="mb-4 cta-desc">
             Let's discuss how we can bring your vision to life.
         </p>
         <a href="{{ route('contact') }}" class="btn-hero-primary">Start a Conversation</a>

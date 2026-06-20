@@ -20,7 +20,7 @@
             <div class="col-lg-4">
                 <div class="contact-info-card">
 
-                    <h4 class="fw-bold mb-4" style="color:#fff;">Contact Information</h4>
+                    <h4 class="fw-bold mb-4 contact-info-title">Contact Information</h4>
 
                     <div class="contact-info-item">
                         <div class="contact-info-icon"><i class="fas fa-phone"></i></div>
@@ -55,19 +55,19 @@
                     </div>
 
                     <!-- Social Links -->
-                    <div class="mt-4 pt-3" style="border-top: 1px solid rgba(255,255,255,.15);">
-                        <p style="font-size:13px; opacity:.7; margin-bottom:12px;">Follow us on</p>
+                    <div class="mt-4 pt-3 contact-social-wrap">
+                        <p class="contact-social-label">Follow us on</p>
                         <div class="d-flex gap-2">
-                            <a href="#" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:background .2s;" class="social-link-ct">
+                            <a href="#" class="social-link-ct">
                                 <i class="fab fa-facebook-f"></i>
                             </a>
-                            <a href="#" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:background .2s;" class="social-link-ct">
+                            <a href="#" class="social-link-ct">
                                 <i class="fab fa-instagram"></i>
                             </a>
-                            <a href="#" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:background .2s;" class="social-link-ct">
+                            <a href="#" class="social-link-ct">
                                 <i class="fab fa-linkedin-in"></i>
                             </a>
-                            <a href="#" style="width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;transition:background .2s;" class="social-link-ct">
+                            <a href="#" class="social-link-ct">
                                 <i class="fab fa-x-twitter"></i>
                             </a>
                         </div>
@@ -80,24 +80,24 @@
             <div class="col-lg-8">
                 <div class="contact-card">
 
-                    <h4 class="fw-bold mb-1" style="color:var(--primary);">Send Us a Message</h4>
-                    <p class="mb-4" style="color:#888; font-size:14.5px;">
+                    <h4 class="fw-bold mb-1 contact-form-title">Send Us a Message</h4>
+                    <p class="mb-4 contact-form-desc">
                         Fill out the form below and we'll respond within 24 hours.
                     </p>
 
                     {{-- Success Alert (Supports both SSR and AJAX) --}}
                     <div id="ajax-success-alert" class="alert-success-custom align-items-center gap-2 mb-4" style="display: {{ session('success') ? 'flex' : 'none' }};">
-                        <i class="fas fa-circle-check" style="font-size:18px;"></i>
+                        <i class="fas fa-circle-check alert-success-icon"></i>
                         <span id="ajax-success-msg">{{ session('success') }}</span>
                     </div>
 
                     {{-- Validation Errors (Supports both SSR and AJAX) --}}
                     <div id="ajax-error-alert" class="alert alert-danger rounded-3 mb-4" style="display: {{ $errors->any() ? 'block' : 'none' }};">
                         <div class="d-flex align-items-center gap-2 mb-2">
-                            <i class="fas fa-triangle-exclamation" style="font-size:16px;"></i>
-                            <strong style="font-size:14.5px;">Please correct the errors below:</strong>
+                            <i class="fas fa-triangle-exclamation alert-danger-icon"></i>
+                            <strong class="alert-danger-title">Please correct the errors below:</strong>
                         </div>
-                        <ul id="ajax-error-list" class="mb-0 ps-3" style="font-size:14px;">
+                        <ul id="ajax-error-list" class="mb-0 ps-3 alert-danger-list">
                             @if($errors->any())
                                 @foreach($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -195,21 +195,20 @@
                                     Verification Code <span class="text-danger">*</span>
                                 </label>
                                 <div class="d-flex align-items-center gap-2 flex-wrap">
-                                    <div class="captcha-img-container" style="border: 1px solid var(--border-light); border-radius: var(--radius-sm); overflow: hidden; background: #f8f9fa; height: 42px; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);">
-                                        <img src="{{ route('captcha.image') }}" alt="CAPTCHA" id="captcha-img" width="140" height="42" style="display: block; object-fit: cover;">
+                                    <div class="captcha-img-container captcha-img-wrap">
+                                        <img src="{{ route('captcha.image') }}" alt="CAPTCHA" id="captcha-img" width="140" height="42" class="captcha-img">
                                     </div>
-                                    <button type="button" class="btn btn-outline-secondary" id="refresh-captcha" style="height: 42px; display: flex; align-items: center; justify-content: center; width: 42px; border-color: var(--border-light); color: var(--primary); transition: all 0.2s;" title="Refresh CAPTCHA">
+                                    <button type="button" class="btn btn-outline-secondary captcha-refresh-btn" id="refresh-captcha" title="Refresh CAPTCHA">
                                         <i class="fas fa-arrows-rotate" id="refresh-icon"></i>
                                     </button>
-                                    <div class="flex-grow-1" style="min-width: 160px;">
+                                    <div class="flex-grow-1 captcha-input-wrap">
                                         <input type="text"
                                                id="captcha"
                                                name="captcha"
-                                               class="form-control @error('captcha') is-invalid @enderror"
+                                               class="form-control captcha-input @error('captcha') is-invalid @enderror"
                                                placeholder="Enter 5-character code"
                                                required
-                                               autocomplete="off"
-                                               style="height: 42px; text-transform: uppercase;">
+                                               autocomplete="off">
                                         @error('captcha')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -236,12 +235,12 @@
 </section>
 
 <!-- ─── MAP SECTION ─── -->
-<section style="padding: 0;">
+<section class="map-section">
     <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.985!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBangalore%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1234567890"
         width="100%"
         height="380"
-        style="display:block; border:0; filter:grayscale(20%);"
+        class="map-iframe"
         allowfullscreen=""
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade"
@@ -406,12 +405,6 @@
             // Scroll smoothly to alert container
             document.querySelector('.contact-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
-    });
-
-    // Social hover colour
-    document.querySelectorAll('.social-link-ct').forEach(el => {
-        el.addEventListener('mouseenter', () => el.style.background = 'var(--secondary)');
-        el.addEventListener('mouseleave', () => el.style.background = 'rgba(255,255,255,.15)');
     });
 </script>
 @endpush

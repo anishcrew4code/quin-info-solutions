@@ -22,8 +22,8 @@
                             @if($tech->logo)
                                 <img src="{{ asset('storage/' . $tech->logo) }}" alt="{{ $tech->name }}">
                             @else
-                                <div style="height:52px; display:flex; align-items:center; justify-content:center;">
-                                    <i class="fas fa-microchip" style="font-size:36px; color:var(--primary);"></i>
+                                <div class="tech-placeholder-img-wrap">
+                                    <i class="fas fa-microchip tech-placeholder-icon"></i>
                                 </div>
                             @endif
                             <span>{{ $tech->name }}</span>
@@ -126,7 +126,7 @@
 <section class="stats-section py-5">
     <div class="container text-center">
         <h2 class="text-white fw-bold mb-3">Need a Custom Tech Solution?</h2>
-        <p class="mb-4" style="color:rgba(255,255,255,.75); font-size:16px;">
+        <p class="mb-4 cta-desc">
             We'll help you choose the right stack for your project.
         </p>
         <a href="{{ route('contact') }}" class="btn-hero-primary">Talk to an Expert</a>

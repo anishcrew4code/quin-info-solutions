@@ -1,6 +1,5 @@
 {{-- Reusable inner page hero banner --}}
-<section class="page-banner"
-         style="background-image: linear-gradient(135deg,rgba(3,20,65,.93) 0%,rgba(3,47,103,.88) 100%), url('{{ asset('assets/images/banner-bg1.jpg') }}');">
+<section class="page-banner">
     <div class="container text-center">
         <h1 class="page-banner-title">{{ $title }}</h1>
         <nav aria-label="breadcrumb">
