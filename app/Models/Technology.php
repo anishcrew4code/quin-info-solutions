@@ -9,6 +9,8 @@ class Technology extends Model
     protected $fillable = [
         'name',
         'logo',
+        'category',
+        'brief',
         'status'
     ];
 }

@@ -19,6 +19,11 @@ class TechnologiesTable
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('category')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('brief')
+                    ->limit(50),
                 ImageColumn::make('logo'),
                 ToggleColumn::make('status')
                     ->sortable(),

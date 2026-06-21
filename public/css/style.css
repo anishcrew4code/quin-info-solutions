@@ -499,9 +499,15 @@ img { max-width: 100%; }
 }
 .tech-card span {
     display: block;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.tech-brief {
     font-size: 13px;
-    font-weight: 600;
-    color: #444;
+    color: var(--text-muted);
+    line-height: 1.5;
 }
 
 .btn-view-all {

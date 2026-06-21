@@ -15,22 +15,44 @@
         </div>
 
         @if($technologies->count())
-            <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-5 g-4">
-                @foreach($technologies as $tech)
-                    <div class="col">
-                        <div class="tech-card">
-                            @if($tech->logo)
-                                <img src="{{ asset('storage/' . $tech->logo) }}" alt="{{ $tech->name }}">
-                            @else
-                                <div class="tech-placeholder-img-wrap">
-                                    <i class="fas fa-microchip tech-placeholder-icon"></i>
+            @php
+                $grouped = $technologies->groupBy('category');
+                $categories = [
+                    'frontend' => 'Frontend',
+                    'backend' => 'Backend',
+                    'database' => 'Database',
+                    'devops' => 'Cloud & DevOps'
+                ];
+            @endphp
+
+            @foreach($categories as $key => $title)
+                @if(isset($grouped[$key]) && $grouped[$key]->count())
+                    <div class="mb-5">
+                        <h4 class="tech-category-title mb-4 fw-bold text-primary">{{ $title }}</h4>
+                        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
+                            @foreach($grouped[$key] as $tech)
+                                <div class="col">
+                                    <div class="tech-card h-100 d-flex flex-column align-items-center text-center p-4">
+                                        <div class="tech-logo-wrap mb-3">
+                                            @if($tech->logo)
+                                                <img src="{{ asset('storage/' . $tech->logo) }}" alt="{{ $tech->name }}">
+                                            @else
+                                                <div class="tech-placeholder-img-wrap">
+                                                    <i class="fas fa-microchip tech-placeholder-icon"></i>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <span>{{ $tech->name }}</span>
+                                        @if($tech->brief)
+                                            <p class="tech-brief mt-2 mb-0">{{ $tech->brief }}</p>
+                                        @endif
+                                    </div>
                                 </div>
-                            @endif
-                            <span>{{ $tech->name }}</span>
+                            @endforeach
                         </div>
                     </div>
-                @endforeach
-            </div>
+                @endif
+            @endforeach
         @else
             {{-- Static fallback grouped by category --}}
 
