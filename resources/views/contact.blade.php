@@ -56,22 +56,42 @@
 
                     <!-- Social Links -->
                     <div class="mt-4 pt-3 contact-social-wrap">
-                        <p class="contact-social-label">Follow us on</p>
-                        <div class="d-flex gap-2">
-                            <a href="#" class="social-link-ct">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="social-link-ct">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="social-link-ct">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="social-link-ct">
-                                <i class="fab fa-x-twitter"></i>
-                            </a>
-                        </div>
-                    </div>
+    <p class="contact-social-label">Follow us on</p>
+
+    <div class="d-flex gap-2">
+        <a href="https://www.facebook.com/profile.php?id=61591153374542"
+           class="social-link-ct"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+
+        <a href="https://www.instagram.com/quininfosolutions"
+           class="social-link-ct"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+
+        <a href="https://www.linkedin.com/in/quin-info-solutions-741490417"
+           class="social-link-ct"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+        </a>
+
+        <a href="https://x.com/Quinfosolution"
+           class="social-link-ct"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="X (Twitter)">
+            <i class="fab fa-x-twitter"></i>
+        </a>
+    </div>
+</div>
 
                 </div>
             </div>
@@ -237,7 +257,7 @@
 <!-- ─── MAP SECTION ─── -->
 <section class="map-section">
     <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.985!2d77.5946!3d12.9716!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBangalore%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1234567890"
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d982.3160884424791!2d76.29157876099636!3d9.995008821036155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1782040919130!5m2!1sen!2sin"
         width="100%"
         height="380"
         class="map-iframe"
@@ -247,7 +267,6 @@
         title="Quin Info Solutions Location">
     </iframe>
 </section>
-
 @push('scripts')
 <script src="{{ asset('js/contact.js') }}" defer></script>
 @endpush
