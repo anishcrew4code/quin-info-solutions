@@ -142,9 +142,7 @@
                                        placeholder="Your full name"
                                        value="{{ old('name') }}"
                                        required>
-                                @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <div class="invalid-feedback">@error('name'){{ $message }}@enderror</div>
                             </div>
 
                             <div class="col-md-6">
@@ -158,9 +156,7 @@
                                        placeholder="your@email.com"
                                        value="{{ old('email') }}"
                                        required>
-                                @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <div class="invalid-feedback">@error('email'){{ $message }}@enderror</div>
                             </div>
 
                             <div class="col-md-4">
@@ -171,9 +167,7 @@
                                         class="form-control @error('phone') is-invalid @enderror"
                                         placeholder="+91 00000 00000"
                                         value="{{ old('phone') }}">
-                                 @error('phone')
-                                     <div class="invalid-feedback">{{ $message }}</div>
-                                 @enderror
+                                 <div class="invalid-feedback">@error('phone'){{ $message }}@enderror</div>
                             </div>
 
                             <div class="col-md-4">
@@ -195,9 +189,7 @@
                                     <option value="General Inquiry"         {{ old('subject') == 'General Inquiry'         ? 'selected' : '' }}>General Inquiry</option>
                                     <option value="Other"                   {{ old('subject') == 'Other'                   ? 'selected' : '' }}>Other</option>
                                 </select>
-                                @error('subject')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <div class="invalid-feedback">@error('subject'){{ $message }}@enderror</div>
                             </div>
 
                             <div class="col-md-4">
@@ -208,9 +200,7 @@
                                        class="form-control @error('reference_name') is-invalid @enderror"
                                        placeholder="Who referred you?"
                                        value="{{ old('reference_name') }}">
-                                @error('reference_name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <div class="invalid-feedback">@error('reference_name'){{ $message }}@enderror</div>
                             </div>
 
                             <div class="col-12">
@@ -223,9 +213,7 @@
                                           class="form-control @error('message') is-invalid @enderror"
                                           placeholder="Tell us about your project or inquiry..."
                                           required>{{ old('message') }}</textarea>
-                                @error('message')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                <div class="invalid-feedback">@error('message'){{ $message }}@enderror</div>
                             </div>
 
                             <!-- CAPTCHA Field -->
@@ -248,9 +236,7 @@
                                                placeholder="Enter 5-character code"
                                                required
                                                autocomplete="off">
-                                        @error('captcha')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
+                                        <div class="invalid-feedback">@error('captcha'){{ $message }}@enderror</div>
                                     </div>
                                 </div>
                             </div>

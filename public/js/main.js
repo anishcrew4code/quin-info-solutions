@@ -383,13 +383,6 @@
         var form = document.getElementById('contactForm');
         if (!form) return;
 
-        form.addEventListener('submit', function () {
-            var btn = document.getElementById('submitBtn');
-            if (!btn) return;
-            btn.disabled  = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending…';
-        });
-
         document.querySelectorAll('.social-link-ct').forEach(function (el) {
             el.addEventListener('mouseenter', function () {
                 this.style.background = 'var(--secondary)';

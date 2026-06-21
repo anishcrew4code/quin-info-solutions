@@ -7,17 +7,8 @@ use Illuminate\Support\Facades\Session;
 
 class CaptchaController extends Controller
 {
-    /**
-     * Generate captcha image and store code in session.
-     */
     public function generate()
     {
-        // Set headers to prevent caching
-        header('Content-Type: image/png');
-        header('Cache-Control: no-cache, no-store, must-revalidate');
-        header('Pragma: no-cache');
-        header('Expires: 0');
-
         // Generate a random code (avoiding confusing characters like 0, O, 1, I, L)
         $characters = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
         $code = '';
@@ -79,10 +70,18 @@ class CaptchaController extends Controller
             imagechar($image, $font, $x + 1, $y + 1, $char, $color);
         }
 
-        // Output image as PNG
+        // Capture image output
+        ob_start();
         imagepng($image);
+        $imageData = ob_get_clean();
         imagedestroy($image);
-        exit;
+
+        // Return Laravel Response to ensure session middleware runs and saves the session
+        return response($imageData)
+            ->header('Content-Type', 'image/png')
+            ->header('Cache-Control', 'no-cache, no-store, must-revalidate')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', '0');
     }
 
     /**
