@@ -16,16 +16,17 @@ class ContactController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name'    => 'required|string|max:255',
-            'email'   => 'required|email|max:255',
-            'phone'   => 'nullable|string|max:20',
-            'subject' => 'nullable|string|max:255',
-            'message' => 'required|string',
-            'captcha' => ['required', 'string', new \App\Rules\Captcha],
+            'name'           => 'required|string|max:255',
+            'email'          => 'required|email|max:255',
+            'phone'          => 'nullable|string|max:20',
+            'subject'        => 'nullable|string|max:255',
+            'reference_name' => 'nullable|string|max:255',
+            'message'        => 'required|string',
+            'captcha'        => ['required', 'string', new \App\Rules\Captcha],
         ]);
 
         Contact::create($request->only([
-            'name', 'email', 'phone', 'subject', 'message'
+            'name', 'email', 'phone', 'subject', 'reference_name', 'message'
         ]));
 
         if ($request->ajax() || $request->wantsJson()) {

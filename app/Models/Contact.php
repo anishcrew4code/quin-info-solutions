@@ -11,6 +11,7 @@ class Contact extends Model
         'email',
         'phone',
         'subject',
+        'reference_name',
         'message'
     ];
 }

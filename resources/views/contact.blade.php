@@ -163,20 +163,20 @@
                                 @enderror
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="phone" class="form-label">Phone Number</label>
                                 <input type="tel"
-                                       id="phone"
-                                       name="phone"
-                                       class="form-control @error('phone') is-invalid @enderror"
-                                       placeholder="+91 00000 00000"
-                                       value="{{ old('phone') }}">
-                                @error('phone')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
+                                        id="phone"
+                                        name="phone"
+                                        class="form-control @error('phone') is-invalid @enderror"
+                                        placeholder="+91 00000 00000"
+                                        value="{{ old('phone') }}">
+                                 @error('phone')
+                                     <div class="invalid-feedback">{{ $message }}</div>
+                                 @enderror
                             </div>
 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <label for="subject" class="form-label">Subject</label>
                                 <select id="subject" name="subject"
                                         class="form-select @error('subject') is-invalid @enderror">
@@ -196,6 +196,19 @@
                                     <option value="Other"                   {{ old('subject') == 'Other'                   ? 'selected' : '' }}>Other</option>
                                 </select>
                                 @error('subject')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="reference_name" class="form-label">Reference Name</label>
+                                <input type="text"
+                                       id="reference_name"
+                                       name="reference_name"
+                                       class="form-control @error('reference_name') is-invalid @enderror"
+                                       placeholder="Who referred you?"
+                                       value="{{ old('reference_name') }}">
+                                @error('reference_name')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

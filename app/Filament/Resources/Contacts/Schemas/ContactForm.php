@@ -20,6 +20,8 @@ class ContactForm
                     ->disabled(),
                 TextInput::make('subject')
                     ->disabled(),
+                TextInput::make('reference_name')
+                    ->disabled(),
                 Textarea::make('message')
                     ->disabled()
                     ->rows(6),

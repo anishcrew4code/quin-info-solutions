@@ -24,6 +24,8 @@ class ContactsTable
                 TextColumn::make('phone'),
                 TextColumn::make('subject')
                     ->searchable(),
+                TextColumn::make('reference_name')
+                    ->searchable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable(),
