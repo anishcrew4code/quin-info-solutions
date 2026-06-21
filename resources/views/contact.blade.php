@@ -181,13 +181,19 @@
                                 <select id="subject" name="subject"
                                         class="form-select @error('subject') is-invalid @enderror">
                                     <option value="" disabled {{ old('subject') ? '' : 'selected' }}>Select a subject</option>
-                                    <option value="Web Development"    {{ old('subject') == 'Web Development'    ? 'selected' : '' }}>Web Development</option>
-                                    <option value="Mobile App"         {{ old('subject') == 'Mobile App'         ? 'selected' : '' }}>Mobile App Development</option>
-                                    <option value="Cloud Solutions"    {{ old('subject') == 'Cloud Solutions'    ? 'selected' : '' }}>Cloud Solutions</option>
-                                    <option value="Software Solutions" {{ old('subject') == 'Software Solutions' ? 'selected' : '' }}>Software Solutions</option>
-                                    <option value="UI/UX Design"       {{ old('subject') == 'UI/UX Design'       ? 'selected' : '' }}>UI/UX Design</option>
-                                    <option value="General Inquiry"    {{ old('subject') == 'General Inquiry'    ? 'selected' : '' }}>General Inquiry</option>
-                                    <option value="Other"              {{ old('subject') == 'Other'              ? 'selected' : '' }}>Other</option>
+                                    <option value="Web Development"         {{ old('subject') == 'Web Development'         ? 'selected' : '' }}>Web Development</option>
+                                    <option value="Mobile App Development"  {{ old('subject') == 'Mobile App Development'  ? 'selected' : '' }}>Mobile App Development</option>
+                                    <option value="Cloud Solutions"         {{ old('subject') == 'Cloud Solutions'         ? 'selected' : '' }}>Cloud Solutions</option>
+                                    <option value="Software Solutions"      {{ old('subject') == 'Software Solutions'      ? 'selected' : '' }}>Software Solutions</option>
+                                    <option value="UI/UX Design"            {{ old('subject') == 'UI/UX Design'            ? 'selected' : '' }}>UI/UX Design</option>
+                                    <option value="Digital Marketing"       {{ old('subject') == 'Digital Marketing'       ? 'selected' : '' }}>Digital Marketing</option>
+                                    <option value="IT Consulting"           {{ old('subject') == 'IT Consulting'           ? 'selected' : '' }}>IT Consulting</option>
+                                    <option value="Cybersecurity Services"  {{ old('subject') == 'Cybersecurity Services'  ? 'selected' : '' }}>Cybersecurity Services</option>
+                                    <option value="E-Commerce Solutions"    {{ old('subject') == 'E-Commerce Solutions'    ? 'selected' : '' }}>E-Commerce Solutions</option>
+                                    <option value="Support & Maintenance"   {{ old('subject') == 'Support & Maintenance'   ? 'selected' : '' }}>Support & Maintenance</option>
+                                    <option value="Emerging Technologies"   {{ old('subject') == 'Emerging Technologies'   ? 'selected' : '' }}>Emerging Technologies</option>
+                                    <option value="General Inquiry"         {{ old('subject') == 'General Inquiry'         ? 'selected' : '' }}>General Inquiry</option>
+                                    <option value="Other"                   {{ old('subject') == 'Other'                   ? 'selected' : '' }}>Other</option>
                                 </select>
                                 @error('subject')
                                     <div class="invalid-feedback">{{ $message }}</div>
