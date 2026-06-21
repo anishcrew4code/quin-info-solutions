@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
         // Truncate existing duplicate services to start fresh
-        Service::truncate();
+        // Service::truncate();
 
         Service::create([
             'title' => 'Web Development',
@@ -95,7 +95,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Seeding Technologies
-        \App\Models\Technology::truncate();
+        // \App\Models\Technology::truncate();
 
         $technologiesDirectory = storage_path('app/public/technologies');
         if (!file_exists($technologiesDirectory)) {
