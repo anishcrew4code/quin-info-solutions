@@ -5,6 +5,8 @@ namespace App\Filament\Resources\Services\Tables;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 
 class ServicesTable
@@ -13,7 +15,19 @@ class ServicesTable
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('title')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('icon')
+                    ->searchable(),
+                TextColumn::make('description')
+                    ->limit(50),
+                ToggleColumn::make('status')
+                    ->sortable(),
+                TextColumn::make('created_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //
