@@ -16,6 +16,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        User::firstOrCreate(
+            ['email' => 'admin@quin.com'],
+            [
+                'name' => 'Admin User',
+                'password' => \Illuminate\Support\Facades\Hash::make('SecureAdmin2026!'),
+                'is_admin' => true,
+            ]
+        );
+
         // User::factory(10)->create();
 
         // User::factory()->create([

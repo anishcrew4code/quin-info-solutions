@@ -3,6 +3,8 @@
 namespace App\Filament\Resources\Contacts\Schemas;
 
 use Filament\Schemas\Schema;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Textarea;
 
 class ContactForm
 {
@@ -10,7 +12,17 @@ class ContactForm
     {
         return $schema
             ->components([
-                //
+                TextInput::make('name')
+                    ->disabled(),
+                TextInput::make('email')
+                    ->disabled(),
+                TextInput::make('phone')
+                    ->disabled(),
+                TextInput::make('subject')
+                    ->disabled(),
+                Textarea::make('message')
+                    ->disabled()
+                    ->rows(6),
             ]);
     }
 }
